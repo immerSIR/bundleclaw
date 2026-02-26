@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Documentation
+    url: https://github.com/immerSIR/bundleclaw#readme
+    about: Check the README and spec docs before opening an issue.
+  - name: Bundle Format Spec
+    url: https://github.com/immerSIR/bundleclaw/blob/main/spec/FORMAT.md
+    about: Technical specification for the .bcz bundle format.
