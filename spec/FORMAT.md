@@ -16,15 +16,10 @@ A `.bcz` file is a standard **ZIP archive** containing a JSON manifest and a pay
 │  ├── credentials/     ← API keys, etc.  │
 │  ├── identity/        ← agent identity  │
 │  └── workspace/                         │
-│      ├── AGENTS.md                      │
-│      ├── SOUL.md                        │
-│      ├── USER.md                        │
-│      ├── TOOLS.md                       │
-│      ├── IDENTITY.md                    │
-│      ├── MEMORY.md                      │
-│      ├── HEARTBEAT.md                   │
-│      ├── memory/      ← memory store    │
-│      └── config/      ← workspace cfg   │
+│      ├── *.md          ← all workspace  │
+│      │                    markdown files │
+│      ├── memory/       ← memory store   │
+│      └── config/       ← workspace cfg  │
 └─────────────────────────────────────────┘
 ```
 
@@ -84,7 +79,7 @@ The manifest is always at the root of the ZIP archive.
 | `openclawJson` | Root agent configuration (`payload/openclaw.json`) |
 | `credentials` | API keys, tokens, service credentials (`payload/credentials/`) |
 | `identity` | Agent identity files (`payload/identity/`) |
-| `workspaceCore` | Core workspace markdown files (SOUL.md, AGENTS.md, etc.) |
+| `workspaceCore` | All workspace files and directories (excluding `memory/` and `config/`) |
 | `workspaceMemory` | Memory store (`payload/workspace/memory/`) |
 | `workspaceConfig` | Workspace configuration (`payload/workspace/config/`) |
 
@@ -156,7 +151,7 @@ When `--encrypt-pass` is used, the ZIP archive is encrypted before writing to di
 1. **Detect encryption**: Check for `BCLAWENC1` magic header. If present, decrypt first.
 2. **Parse manifest**: Read `manifest.json` from the ZIP root.
 3. **Validate format**: Reject if `format` is not `bundleclaw.v1` (unknown major versions must be rejected).
-4. **Create backup**: Copy existing target directory to `<target>/.bundleclaw-backup-<timestamp>/`.
+4. **Create backup**: Copy existing target directory to `<target>.bundleclaw-backup-<timestamp>/` (sibling directory, not inside target).
 5. **Extract payload**: Restore files from `payload/` into the target directory, preserving relative paths.
 6. **Verify checksums**: Compare SHA-256 digests against manifest checksums.
 

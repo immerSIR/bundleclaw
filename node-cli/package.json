@@ -1,6 +1,6 @@
 {
   "name": "bundleclaw",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Migrate OpenClaw agent state between machines",
   "type": "module",
   "license": "MIT",

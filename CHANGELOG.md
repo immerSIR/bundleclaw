@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-02-26
+
+### Fixed
+
+- Backup path created as sibling directory instead of inside target, preventing self-copy recursion error on existing targets
+- Export now includes all workspace files, not just hardcoded core files (e.g., `TASKS_DONE.md` now migrates)
+
 ## [0.1.0] - 2026-02-26
 
 ### Added
@@ -24,5 +31,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CI pipeline for both runtimes (GitHub Actions)
 - Automated release publishing to npm and PyPI on git tags
 
-[Unreleased]: https://github.com/immerSIR/bundleclaw/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/immerSIR/bundleclaw/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/immerSIR/bundleclaw/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/immerSIR/bundleclaw/releases/tag/v0.1.0

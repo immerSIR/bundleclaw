@@ -102,7 +102,15 @@ program
 
     const wsDst = path.join(payload, "workspace");
     mkdirp(wsDst);
-    if (includeWorkspaceCore) for (const f of CORE_WORKSPACE_FILES) copyIfExists(path.join(workspace, f), path.join(wsDst, f));
+    if (includeWorkspaceCore) {
+      if (exists(workspace)) {
+        for (const entry of fs.readdirSync(workspace)) {
+          const full = path.join(workspace, entry);
+          if (entry === "memory" || entry === "config") continue;
+          copyIfExists(full, path.join(wsDst, entry));
+        }
+      }
+    }
     if (includeWorkspaceMemory) copyIfExists(path.join(workspace, "memory"), path.join(wsDst, "memory"));
     if (includeWorkspaceConfig) copyIfExists(path.join(workspace, "config"), path.join(wsDst, "config"));
 
@@ -158,9 +166,8 @@ program
     zip.extractAllTo(tmp, true);
 
     const payload = path.join(tmp, "payload");
-    const backup = path.join(target, `.bundleclaw-backup-${Date.now()}`);
     if (exists(target)) {
-      mkdirp(path.dirname(backup));
+      const backup = path.join(path.dirname(target), `${path.basename(target)}.bundleclaw-backup-${Date.now()}`);
       fs.cpSync(target, backup, { recursive: true });
       console.log(`Backup created: ${backup}`);
     }
@@ -222,9 +229,8 @@ program
     zip.extractAllTo(tmp, true);
 
     const payload = path.join(tmp, "payload");
-    const backup = path.join(target, `.bundleclaw-backup-${Date.now()}`);
     if (exists(target)) {
-      mkdirp(path.dirname(backup));
+      const backup = path.join(path.dirname(target), `${path.basename(target)}.bundleclaw-backup-${Date.now()}`);
       fs.cpSync(target, backup, { recursive: true });
       console.log(`Backup created: ${backup}`);
     }

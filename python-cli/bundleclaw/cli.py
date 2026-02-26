@@ -114,8 +114,11 @@ def export_cmd(
     ws_dst = payload / "workspace"
     ws_dst.mkdir(parents=True, exist_ok=True)
     if include_workspace_core:
-        for f in CORE_WORKSPACE_FILES:
-            copy_if_exists(workspace / f, ws_dst / f)
+        if workspace.exists():
+            for entry in workspace.iterdir():
+                if entry.name in ("memory", "config"):
+                    continue
+                copy_if_exists(entry, ws_dst / entry.name)
     if include_workspace_memory:
         copy_if_exists(workspace / "memory", ws_dst / "memory")
     if include_workspace_config:
