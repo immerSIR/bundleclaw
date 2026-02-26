@@ -1,0 +1,25 @@
+# Node
+node_modules/
+node-cli/dist/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.python-version
+.venv/
+
+# Build artifacts
+*.bcz
+*.zip
+*.tar.gz
+*.whl
+build/
+dist/
+*.egg-info/
+
+# Temp
+bundleclaw-export-*
+bundleclaw-import-*
+bundleclaw-bootstrap-*
