@@ -23,3 +23,6 @@ dist/
 bundleclaw-export-*
 bundleclaw-import-*
 bundleclaw-bootstrap-*
+
+# OS
+.DS_Store
